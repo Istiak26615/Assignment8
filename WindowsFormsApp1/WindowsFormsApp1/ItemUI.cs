@@ -52,15 +52,15 @@ namespace WindowsFormsApp1
                 SqlConnection sqlConnection = new SqlConnection(connectionString);
 
                 //Command
-
-                string commandString = @"INSERT INTO  Items (FoodName, FoodPrice) Values ('" + foodnameTextBox.Text + "', " + priceTextBox.Text + ")";
-                SqlCommand sqlCommand = new SqlCommand(commandString, sqlConnection);
-
-                if (commandString.Contains(foodnameTextBox.Text))
+                string uniqueCommand = @"select*from Items where FoodName='" + foodnameTextBox.Text + "'";
+                if (uniqueCommand.Contains(foodnameTextBox.Text))
                 {
                     MessageBox.Show("Item must be unique");
                     return;
                 }
+                string commandString = @"INSERT INTO  Items (FoodName, FoodPrice) Values ('" + foodnameTextBox.Text + "', " + priceTextBox.Text + ")";
+                SqlCommand sqlCommand = new SqlCommand(commandString, sqlConnection);
+
 
                 //Open
                 sqlConnection.Open();

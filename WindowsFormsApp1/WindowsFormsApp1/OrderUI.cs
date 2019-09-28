@@ -25,15 +25,17 @@ namespace WindowsFormsApp1
             string connectionString = @"Server=DESKTOP-DHMDHJ9; DataBase=CoffeeShop; Integrated Security=True";
             SqlConnection sqlConnection = new SqlConnection(connectionString);
 
-            //Command
-
-            string commandString = @"INSERT INTO  Orders (FoodName, FoodPrice,Quantity,TotalBill) Values ('" + foodnameTextBox.Text + "', " + priceTextBox.Text + "," + quantityTextBox.Text + "," + billTextBox.Text + ")";
-            SqlCommand sqlCommand = new SqlCommand(commandString, sqlConnection);
+                //Command
+                string uniqueCommand = @"select*from Orders where FoodName='" + foodnameTextBox.Text + "'";
                 if (commandString.Contains(foodnameTextBox.Text))
                 {
                     MessageBox.Show("Item must be unique");
                     return;
                 }
+
+                string commandString = @"INSERT INTO  Orders (FoodName, FoodPrice,Quantity,TotalBill) Values ('" + foodnameTextBox.Text + "', " + priceTextBox.Text + "," + quantityTextBox.Text + "," + billTextBox.Text + ")";
+            SqlCommand sqlCommand = new SqlCommand(commandString, sqlConnection);
+                
                 
 
                 //Open

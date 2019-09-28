@@ -27,15 +27,17 @@ namespace WindowsFormsApp1
                 SqlConnection sqlConnection = new SqlConnection(connectionString);
 
                 //Command
-
+                string uniqueCommand= @"select*from customers where Name='"+customernameTextBox.Text+"'";
+                if (commandString.Contains(customernameTextBox.Text))
+                {
+                    MessageBox.Show("Customer Name must be unique") ;
+                    return;
+                }
+                
                 string commandString = @"INSERT INTO  Customers (Name, Address, Contact) Values ('" + customernameTextBox.Text + "', '" + addressTextBox.Text + "','" + contactTextBox.Text + "')";
                 SqlCommand sqlCommand = new SqlCommand(commandString, sqlConnection);
                 
-                if (commandString.Contains(customernameTextBox.Text))
-                {
-                    MessageBox.Show("Customer Name must be unique");
-                    return;
-                }
+                
                 //Open
                 sqlConnection.Open();
 
